@@ -50,6 +50,10 @@ namespace cdjwebapi.Controllers
                     context.Entry(room).Reference(r => r.Host).Load();      // Load host
                     context.Entry(room).Collection(r => r.RoomUsers).Load(); // Load users
                     context.Entry(room).Collection(r => r.RoomSongs).Load(); // Load songs
+                    foreach (RoomUser roomUser in room.RoomUsers)
+                    {
+                        context.Entry(roomUser).Reference(ru => ru.User).Load(); // Load each user
+                    }
 
                     return room;
                 }
