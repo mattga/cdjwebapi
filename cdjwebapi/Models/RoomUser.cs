@@ -7,18 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
 namespace cdjwebapi.Models
 {
-    public partial class RoomUser : BaseModel
+    public class RoomUser : BaseModel
     {
-        public RoomUser() { }
-
-        public RoomUser(StatusCode code = StatusCode.Ok) : base(code) { }
-
         public int RoomId { get; set; }
         public int UserId { get; set; }
         public long Tokens { get; set; }
-
+    
         public virtual Room Room { get; set; }
         public virtual User User { get; set; }
     }

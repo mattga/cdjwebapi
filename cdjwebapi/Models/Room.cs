@@ -7,29 +7,34 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
 namespace cdjwebapi.Models
 {
-    using System;
-    using System.Collections.Generic;
-
-    public partial class Room : BaseModel
+    public class Room : BaseModel
     {
-        public Room()
-        {
-            Init();
-        }
-
-        public Room(StatusCode code) : base(code)
-        {
-            Init();
-        }
-
-        private void Init()
+    	public Room()
+    	{
+    		Init();
+    	}
+    	
+    	public Room(StatusCode code) : base(code)
+    	{
+    		Init();
+    	}
+    
+    	public Room(Status status) : base(status)
+    	{
+    		Init();
+    	}
+    
+        public void Init()
         {
             RoomSongs = new HashSet<RoomSong>();
             RoomUsers = new HashSet<RoomUser>();
         }
-
+    
         public int RoomId { get; set; }
         public int? HostId { get; set; }
         public string RoomName { get; set; }
@@ -37,7 +42,7 @@ namespace cdjwebapi.Models
         public double? Longitude { get; set; }
         public bool isPrivate { get; set; }
         public int? AccessCode { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         public int? CurrentSongId { get; set; }
         public string BannerUrl { get; set; }
         public int? CurrentSongTime { get; set; }
@@ -45,8 +50,8 @@ namespace cdjwebapi.Models
         public bool? AllowYT { get; set; }
         public bool? AllowSP { get; set; }
     
-        public virtual User User { get; set; }
-        public virtual RoomSong RoomSong { get; set; }
+        public virtual User Host { get; set; }
+        public virtual RoomSong CurrentSong { get; set; }
         public virtual ICollection<RoomSong> RoomSongs { get; set; }
         public virtual ICollection<RoomUser> RoomUsers { get; set; }
     }

@@ -7,25 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
 namespace cdjwebapi.Models
 {
-    using Newtonsoft.Json;
-    using System;
-    using System.Collections.Generic;
-
-    public partial class RoomSong : BaseModel
+    public class RoomSong : BaseModel
     {
-        public RoomSong()
-        {
-            Init();
-        }
-
-        public RoomSong(StatusCode code) : base(code)
-        {
-            Init();
-        }
-
-        void Init()
+    	public RoomSong()
+    	{
+    		Init();
+    	}
+    	
+    	public RoomSong(StatusCode code) : base(code)
+    	{
+    		Init();
+    	}
+    
+    	public RoomSong(Status status) : base(status)
+    	{
+    		Init();
+    	}
+    
+        public void Init()
         {
             Rooms = new HashSet<Room>();
         }
@@ -39,13 +43,12 @@ namespace cdjwebapi.Models
         public string Thumbnail { get; set; }
         public string Thumbnail_Lg { get; set; }
         public int? Length { get; set; }
-        public DateTime? PublishedDate { get; set; }
+        public System.DateTime? PublishedDate { get; set; }
         public int Tokens { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public System.DateTime? CreatedDate { get; set; }
         public string Source { get; set; }
         public int? SourceLikeCount { get; set; }
     
-        [JsonIgnore]
         public virtual ICollection<Room> Rooms { get; set; }
         public virtual Room Room { get; set; }
     }

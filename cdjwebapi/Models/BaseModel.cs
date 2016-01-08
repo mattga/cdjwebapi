@@ -24,7 +24,12 @@ namespace cdjwebapi.Models
 
         public BaseModel(StatusCode code = StatusCode.Ok)
         {
-            this.status = new Status(code);
+            status = new Status(code);
+        }
+
+        public BaseModel(Status status)
+        {
+            this.status = status;
         }
     }
 

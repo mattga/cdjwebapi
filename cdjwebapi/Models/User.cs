@@ -7,25 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
 namespace cdjwebapi.Models
 {
-    using Newtonsoft.Json;
-    using System;
-    using System.Collections.Generic;
-
-    public partial class User : BaseModel
+    public class User : BaseModel
     {
-        public User()
-        {
-            Init();
-        }
-
-        public User(StatusCode code) : base(code)
-        {
-            Init();
-        }
-
-        private void Init()
+    	public User()
+    	{
+    		Init();
+    	}
+    	
+    	public User(StatusCode code) : base(code)
+    	{
+    		Init();
+    	}
+    
+    	public User(Status status) : base(status)
+    	{
+    		Init();
+    	}
+    
+        public void Init()
         {
             Rooms = new HashSet<Room>();
             RoomUsers = new HashSet<RoomUser>();
@@ -35,7 +39,7 @@ namespace cdjwebapi.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
@@ -45,9 +49,7 @@ namespace cdjwebapi.Models
         public string spEmail { get; set; }
         public bool? spProduct { get; set; }
     
-        [JsonIgnore]
         public virtual ICollection<Room> Rooms { get; set; }
-        [JsonIgnore]
         public virtual ICollection<RoomUser> RoomUsers { get; set; }
     }
 }

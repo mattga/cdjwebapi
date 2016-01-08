@@ -13,11 +13,11 @@ namespace cdjwebapi.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class db5cbd36be2b64435bb940a48d0153e78eEntities : DbContext
+    public partial class DbEntities : DbContext
     {
-        public db5cbd36be2b64435bb940a48d0153e78eEntities()
-            : base("name=db5cbd36be2b64435bb940a48d0153e78eEntities")
+        public DbEntities() : base("name=DbEntities")
         {
+            Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

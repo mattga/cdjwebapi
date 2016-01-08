@@ -159,60 +159,53 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\Entities.cs" />
-    <Compile Include="Models\DataModel.Context.cs">
+    <Compile Include="Models\DbEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataModel.Context.tt</DependentUpon>
+      <DependentUpon>DbEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataModel.cs">
+    <Compile Include="Models\DbEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataModel.tt</DependentUpon>
+      <DependentUpon>DbEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataModel.Designer.cs">
+    <Compile Include="Models\DbEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataModel.edmx</DependentUpon>
+      <DependentUpon>DbEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Room.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
+      <DependentUpon>DbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RoomSong.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
+      <DependentUpon>DbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RoomUser.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
+      <DependentUpon>DbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
+      <DependentUpon>DbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <EntityDeploy Include="Models\DataModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DataModel.edmx.diagram">
-      <DependentUpon>DataModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\DataModel.Context.tt">
+    <Content Include="Models\DbEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataModel.edmx</DependentUpon>
-      <LastGenOutput>DataModel.Context.cs</LastGenOutput>
+      <DependentUpon>DbEntities.edmx</DependentUpon>
+      <LastGenOutput>DbEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DataModel.tt">
+    <Content Include="Models\DbEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataModel.edmx</DependentUpon>
-      <LastGenOutput>DataModel.cs</LastGenOutput>
+      <DependentUpon>DbEntities.edmx</DependentUpon>
+      <LastGenOutput>DbEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -228,7 +221,17 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EntityDeploy Include="Models\DbEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DbEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\DbEntities.edmx.diagram">
+      <DependentUpon>DbEntities.edmx</DependentUpon>
+    </Content>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

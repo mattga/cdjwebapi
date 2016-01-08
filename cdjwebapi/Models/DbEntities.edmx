@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="db5cbd36be2b64435bb940a48d0153e78eModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Log">
@@ -136,7 +136,7 @@ warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="db5cbd36be2b64435bb940a48d0153e78eModelStoreContainer">
+        <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="db5cbd36be2b64435bb940a48d0153e78e" store:Type="Tables" />
           <EntitySet Name="RoomSongs" EntityType="Self.RoomSongs" Schema="db5cbd36be2b64435bb940a48d0153e78e" store:Type="Tables" />
           <EntitySet Name="RoomUsers" EntityType="Self.RoomUsers" Schema="db5cbd36be2b64435bb940a48d0153e78e" store:Type="Tables" />
@@ -162,10 +162,11 @@ warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not h
             <End Role="RoomUsers" EntitySet="RoomUsers" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="db5cbd36be2b64435bb940a48d0153e78eModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Room">
           <Key>
             <PropertyRef Name="RoomId" />
@@ -184,8 +185,8 @@ warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not h
           <Property Name="IsPlaying" Type="Boolean" />
           <Property Name="AllowYT" Type="Boolean" />
           <Property Name="AllowSP" Type="Boolean" />
-          <NavigationProperty Name="User" Relationship="Self.Rooms_ibfk_1" FromRole="Rooms" ToRole="Users" />
-          <NavigationProperty Name="RoomSong" Relationship="Self.Rooms_ibfk_2" FromRole="Rooms" ToRole="RoomSongs" />
+          <NavigationProperty Name="Host" Relationship="Self.Rooms_ibfk_1" FromRole="Rooms" ToRole="Users" />
+          <NavigationProperty Name="CurrentSong" Relationship="Self.Rooms_ibfk_2" FromRole="Rooms" ToRole="RoomSongs" />
           <NavigationProperty Name="RoomSongs" Relationship="Self.RoomSongs_ibfk_1" FromRole="Rooms" ToRole="RoomSongs" />
           <NavigationProperty Name="RoomUsers" Relationship="Self.RoomUsers_ibfk_1" FromRole="Rooms" ToRole="RoomUsers" />
         </EntityType>
@@ -301,7 +302,7 @@ warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="db5cbd36be2b64435bb940a48d0153e78eEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DbEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="Rooms" EntityType="Self.Room" />
           <EntitySet Name="RoomSongs" EntityType="Self.RoomSong" />
           <EntitySet Name="RoomUsers" EntityType="Self.RoomUser" />
@@ -332,9 +333,9 @@ warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not h
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="db5cbd36be2b64435bb940a48d0153e78eModelStoreContainer" CdmEntityContainer="db5cbd36be2b64435bb940a48d0153e78eEntities">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="DbEntities">
           <EntitySetMapping Name="Rooms">
-            <EntityTypeMapping TypeName="db5cbd36be2b64435bb940a48d0153e78eModel.Room">
+            <EntityTypeMapping TypeName="Model.Room">
               <MappingFragment StoreEntitySet="Rooms">
                 <ScalarProperty Name="RoomId" ColumnName="RoomId" />
                 <ScalarProperty Name="HostId" ColumnName="HostId" />
@@ -354,7 +355,7 @@ warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not h
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RoomSongs">
-            <EntityTypeMapping TypeName="db5cbd36be2b64435bb940a48d0153e78eModel.RoomSong">
+            <EntityTypeMapping TypeName="Model.RoomSong">
               <MappingFragment StoreEntitySet="RoomSongs">
                 <ScalarProperty Name="SongId" ColumnName="SongId" />
                 <ScalarProperty Name="RoomId" ColumnName="RoomId" />
@@ -374,7 +375,7 @@ warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not h
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RoomUsers">
-            <EntityTypeMapping TypeName="db5cbd36be2b64435bb940a48d0153e78eModel.RoomUser">
+            <EntityTypeMapping TypeName="Model.RoomUser">
               <MappingFragment StoreEntitySet="RoomUsers">
                 <ScalarProperty Name="RoomId" ColumnName="RoomId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -383,7 +384,7 @@ warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not h
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="db5cbd36be2b64435bb940a48d0153e78eModel.User">
+            <EntityTypeMapping TypeName="Model.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Username" ColumnName="Username" />

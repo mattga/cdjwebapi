@@ -12,16 +12,17 @@ namespace cdjwebapi.Controllers
         {
             try
             {
-                using (var context = new Entities())
+                using (var context = new DbEntities())
                 {
-                    return context.Users.ToArray();
+                    var a = context.Users.ToArray();
+                    return a;
                 }
             }
             catch (Exception e)
             {
                 return new User[]
                 {
-                    new Models.User { Status = new Status(e) }
+                    new User { Status = new Status(e) }
                 };
             }
         }
@@ -31,7 +32,7 @@ namespace cdjwebapi.Controllers
         {
             try
             {
-                using (var context = new Entities())
+                using (var context = new DbEntities())
                 {
                     var res = (from u in context.Users
                                where u.UserId == id
@@ -56,7 +57,7 @@ namespace cdjwebapi.Controllers
         {
             try
             {
-                using (var context = new Entities())
+                using (var context = new DbEntities())
                 {
                     u.CreatedDate = DateTime.Now;
                     context.Users.Add(u);
