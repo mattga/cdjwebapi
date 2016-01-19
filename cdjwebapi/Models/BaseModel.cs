@@ -44,19 +44,21 @@ namespace cdjwebapi.Models
         [DataMember]
         public string StackTrace { get; set; }
 
-        public Status(StatusCode code = StatusCode.Ok, string description = "", 
+        public Status() { }
+
+        public Status(StatusCode code = StatusCode.Ok, string description = "",
             string stackTrace = "")
         {
-            this.Code = code;
-            this.Description = Description;
-            this.StackTrace = StackTrace;
+            Code = code;
+            Description = Description;
+            StackTrace = StackTrace;
         }
 
         public Status(Exception e)
         {
-            this.Code = StatusCode.Error;
-            this.Description = e.Message;
-            this.StackTrace = e.StackTrace;
+            Code = StatusCode.Error;
+            Description = e.Message;
+            StackTrace = e.StackTrace;
         }
     }
 }
