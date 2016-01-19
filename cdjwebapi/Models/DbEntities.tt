@@ -51,7 +51,7 @@ public class <#=code.Escape(entity)#> : BaseModel
 		Init();
 	}
 
-    public void Init()
+    private void Init()
     {
 <#
         foreach (var edmProperty in propertiesWithDefaultValues)

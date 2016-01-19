@@ -29,7 +29,7 @@ namespace cdjwebapi.Models
     		Init();
     	}
     
-        public void Init()
+        private void Init()
         {
             Rooms = new HashSet<Room>();
             RoomUsers = new HashSet<RoomUser>();
@@ -45,7 +45,6 @@ namespace cdjwebapi.Models
         public string Country { get; set; }
         public string ImageUrl { get; set; }
         public string spUsername { get; set; }
-        public string spCanonicalUsername { get; set; }
         public string spEmail { get; set; }
         public bool? spProduct { get; set; }
     

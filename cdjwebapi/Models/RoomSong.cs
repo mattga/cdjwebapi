@@ -29,7 +29,7 @@ namespace cdjwebapi.Models
     		Init();
     	}
     
-        public void Init()
+        private void Init()
         {
             Rooms = new HashSet<Room>();
         }

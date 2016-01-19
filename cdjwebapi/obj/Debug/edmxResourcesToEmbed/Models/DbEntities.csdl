@@ -61,7 +61,7 @@
     </Key>
     <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Username" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="None" />
     <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
     <Property Name="City" Type="String" MaxLength="56" FixedLength="false" Unicode="false" />
@@ -69,7 +69,6 @@
     <Property Name="Country" Type="String" MaxLength="56" FixedLength="false" Unicode="false" />
     <Property Name="ImageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="spUsername" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="spCanonicalUsername" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="spEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="spProduct" Type="Boolean" />
     <NavigationProperty Name="Rooms" Relationship="Self.Rooms_ibfk_1" FromRole="Users" ToRole="Rooms" />

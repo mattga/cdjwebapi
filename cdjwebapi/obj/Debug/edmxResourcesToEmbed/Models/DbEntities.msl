@@ -63,7 +63,6 @@
           <ScalarProperty Name="Country" ColumnName="Country" />
           <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
           <ScalarProperty Name="spUsername" ColumnName="spUsername" />
-          <ScalarProperty Name="spCanonicalUsername" ColumnName="spCanonicalUsername" />
           <ScalarProperty Name="spEmail" ColumnName="spEmail" />
           <ScalarProperty Name="spProduct" ColumnName="spProduct" />
         </MappingFragment>

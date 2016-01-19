@@ -1,11 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Log">
-          <Property Name="Message" Type="varchar" MaxLength="255" />
-          <Property Name="Date" Type="timestamp" Precision="0" />
-        </EntityType>-->
   <EntityType Name="Rooms">
     <Key>
       <PropertyRef Name="RoomId" />
@@ -67,7 +61,6 @@ warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not h
     <Property Name="Country" Type="varchar" MaxLength="56" />
     <Property Name="ImageUrl" Type="varchar" MaxLength="255" />
     <Property Name="spUsername" Type="varchar" MaxLength="255" />
-    <Property Name="spCanonicalUsername" Type="varchar" MaxLength="255" />
     <Property Name="spEmail" Type="varchar" MaxLength="255" />
     <Property Name="spProduct" Type="bool" />
   </EntityType>

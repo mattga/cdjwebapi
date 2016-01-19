@@ -4,13 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Log">
-          <Property Name="Message" Type="varchar" MaxLength="255" />
-          <Property Name="Date" Type="timestamp" Precision="0" />
-        </EntityType>-->
+    <Schema Namespace="Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Rooms">
           <Key>
             <PropertyRef Name="RoomId" />
@@ -72,7 +66,6 @@ warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not h
           <Property Name="Country" Type="varchar" MaxLength="56" />
           <Property Name="ImageUrl" Type="varchar" MaxLength="255" />
           <Property Name="spUsername" Type="varchar" MaxLength="255" />
-          <Property Name="spCanonicalUsername" Type="varchar" MaxLength="255" />
           <Property Name="spEmail" Type="varchar" MaxLength="255" />
           <Property Name="spProduct" Type="bool" />
         </EntityType>
@@ -162,8 +155,7 @@ warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not h
             <End Role="RoomUsers" EntitySet="RoomUsers" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -228,7 +220,7 @@ warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not h
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="City" Type="String" MaxLength="56" FixedLength="false" Unicode="false" />
@@ -236,7 +228,6 @@ warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not h
           <Property Name="Country" Type="String" MaxLength="56" FixedLength="false" Unicode="false" />
           <Property Name="ImageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="spUsername" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="spCanonicalUsername" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="spEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="spProduct" Type="Boolean" />
           <NavigationProperty Name="Rooms" Relationship="Self.Rooms_ibfk_1" FromRole="Users" ToRole="Rooms" />
@@ -396,7 +387,6 @@ warning 6013: The table/view 'db5cbd36be2b64435bb940a48d0153e78e.Log' does not h
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="spUsername" ColumnName="spUsername" />
-                <ScalarProperty Name="spCanonicalUsername" ColumnName="spCanonicalUsername" />
                 <ScalarProperty Name="spEmail" ColumnName="spEmail" />
                 <ScalarProperty Name="spProduct" ColumnName="spProduct" />
               </MappingFragment>
