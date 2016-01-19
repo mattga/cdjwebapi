@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace cdjwebapi.Models
 {
@@ -33,10 +34,14 @@ namespace cdjwebapi.Models
         }
     }
 
+    [DataContract]
     public class Status
     {
+        [DataMember]
         public StatusCode Code { get; set; }
+        [DataMember]
         public string Description { get; set; }
+        [DataMember]
         public string StackTrace { get; set; }
 
         public Status(StatusCode code = StatusCode.Ok, string description = "", 
