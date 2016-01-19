@@ -13,8 +13,10 @@ namespace cdjwebapi.Models
         Error = 99
     }
 
+    [DataContract]
     public class BaseModel
     {
+        [DataMember]
         private Status status = new Status();
 
         public Status Status
@@ -34,18 +36,12 @@ namespace cdjwebapi.Models
         }
     }
 
-    [DataContract]
     public class Status
     {
-        [DataMember]
         public StatusCode Code { get; set; }
-        [DataMember]
         public string Description { get; set; }
-        [DataMember]
         public string StackTrace { get; set; }
-
-        public Status() { }
-
+        
         public Status(StatusCode code = StatusCode.Ok, string description = "",
             string stackTrace = "")
         {
