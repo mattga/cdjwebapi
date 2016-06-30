@@ -13,7 +13,7 @@ namespace cdjwebapi.Models
         Error = 99
     }
 
-    [DataContract]
+    [Serializable]
     public class BaseModel
     {
         [DataMember]
