@@ -1,13 +1,12 @@
 ﻿using cdjwebapi.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace cdjwebapi.Controllers
 {
+    [RoutePrefix("api/room")]
     public class RoomController : ApiController
     {
         // GET api/room
@@ -43,11 +42,11 @@ namespace cdjwebapi.Controllers
 
                     if (res.Count() == 0)
                     {
-                        return new Room(StatusCode.NotFound);
+                        return new Room(CDJStatusCode.NotFound);
                     }
 
                     var room = res.First();
-                    context.Entry(room).Reference(r => r.Host).Load();      // Load host
+                    context.Entry(room).Reference(r => r.Host).Load(); // Load host
                     context.Entry(room).Collection(r => r.RoomUsers).Load(); // Load users
                     context.Entry(room).Collection(r => r.RoomSongs).Load(); // Load songs
                     foreach (RoomUser roomUser in room.RoomUsers)
@@ -61,6 +60,40 @@ namespace cdjwebapi.Controllers
             catch (Exception e)
             {
                 return new Room { Status = new Status(e) };
+            }
+        }
+
+        // POST api/room/<id>/join
+        [Route("{id:int}/join"), HttpPost]
+        public RoomUser Join(int id, User u)
+        {
+            try
+            {
+                using (var context = new DbEntities())
+                {
+                    var res = (from r in context.Rooms
+                               where r.RoomId == id
+                               select r);
+
+                    if (res.Count() == 0) return new RoomUser(CDJStatusCode.NotFound);
+
+                    var roomUser = context.RoomUsers.Create();
+                    roomUser.UserId = u.UserId;
+                    roomUser.RoomId = res.First().RoomId;
+                    roomUser.Tokens = 100;
+                    context.RoomUsers.Add(roomUser);
+
+                    int ret = context.SaveChanges();
+
+                    if (ret > 0) return roomUser;
+                    else return new RoomUser {
+                        Status = new Status(CDJStatusCode.Error, "Failed to commit new RoomUser")
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+                return new RoomUser { Status = new Status(e) };
             }
         }
     }

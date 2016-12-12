@@ -14,6 +14,25 @@ namespace cdjwebapi.Models
 {
     public class RoomUser : BaseModel
     {
+    	public RoomUser()
+    	{
+    		Init();
+    	}
+    	
+    	public RoomUser(CDJStatusCode code) : base(code)
+    	{
+    		Init();
+    	}
+    
+    	public RoomUser(Status status) : base(status)
+    	{
+    		Init();
+    	}
+    
+        private void Init()
+        {
+        }
+    
         public int RoomId { get; set; }
         public int UserId { get; set; }
         public long Tokens { get; set; }

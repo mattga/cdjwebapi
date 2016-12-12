@@ -33,7 +33,7 @@ public class <#=code.Escape(entity)#> : BaseModel
     var collectionNavigationProperties = typeMapper.GetCollectionNavigationProperties(entity);
     var complexProperties = typeMapper.GetComplexProperties(entity);
 
-    if (propertiesWithDefaultValues.Any() || collectionNavigationProperties.Any() || complexProperties.Any())
+    if (true/*propertiesWithDefaultValues.Any() || collectionNavigationProperties.Any() || complexProperties.Any()*/)
     {
 #>
 	public <#=code.Escape(entity)#>()
@@ -41,7 +41,7 @@ public class <#=code.Escape(entity)#> : BaseModel
 		Init();
 	}
 	
-	public <#=code.Escape(entity)#>(StatusCode code) : base(code)
+	public <#=code.Escape(entity)#>(CDJStatusCode code) : base(code)
 	{
 		Init();
 	}

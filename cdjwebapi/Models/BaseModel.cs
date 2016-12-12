@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace cdjwebapi.Models
 {
-    public enum StatusCode
+    public enum CDJStatusCode
     {
         Ok = 0,
         NotFound,
@@ -25,11 +25,11 @@ namespace cdjwebapi.Models
             set { status = value; }
         }
 
-        public BaseModel(StatusCode code = StatusCode.Ok)
+        public BaseModel(CDJStatusCode code = CDJStatusCode.Ok)
         {
             status = new Status(code);
         }
-
+        
         public BaseModel(Status status)
         {
             this.status = status;
@@ -38,21 +38,21 @@ namespace cdjwebapi.Models
 
     public class Status
     {
-        public StatusCode Code { get; set; }
+        public CDJStatusCode Code { get; set; }
         public string Description { get; set; }
         public string StackTrace { get; set; }
         
-        public Status(StatusCode code = StatusCode.Ok, string description = "",
+        public Status(CDJStatusCode code = CDJStatusCode.Ok, string description = "",
             string stackTrace = "")
         {
             Code = code;
-            Description = Description;
-            StackTrace = StackTrace;
+            Description = description;
+            StackTrace = stackTrace;
         }
 
         public Status(Exception e)
         {
-            Code = StatusCode.Error;
+            Code = CDJStatusCode.Error;
             Description = e.Message;
             StackTrace = e.StackTrace;
         }

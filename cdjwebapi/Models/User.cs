@@ -19,7 +19,7 @@ namespace cdjwebapi.Models
     		Init();
     	}
     	
-    	public User(StatusCode code) : base(code)
+    	public User(CDJStatusCode code) : base(code)
     	{
     		Init();
     	}

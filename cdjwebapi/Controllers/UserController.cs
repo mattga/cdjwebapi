@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Web.Http;
 using cdjwebapi.Models;
+using System.Web.Http;
 
 namespace cdjwebapi.Controllers
 {
@@ -38,7 +38,7 @@ namespace cdjwebapi.Controllers
 
                     if (res == null)
                     {
-                        return new User(StatusCode.NotFound);
+                        return new User(CDJStatusCode.NotFound);
                     }
 
                     return res;
@@ -83,7 +83,7 @@ namespace cdjwebapi.Controllers
                     {
                         res = context.Users.Add(user);
                         res.CreatedDate = DateTime.Now;
-                        res.Status = new Status(StatusCode.NotFound);
+                        res.Status = new Status(CDJStatusCode.NotFound);
                     }
                     else
                     {
@@ -104,7 +104,8 @@ namespace cdjwebapi.Controllers
         }
 
         // POST api/user/authenticate
-        [ActionName("authenticate")]
+        [Route("user/authenticate")]
+        [HttpPost]
         public User Authenticate(User user)
         {
             try
@@ -117,7 +118,7 @@ namespace cdjwebapi.Controllers
 
                     if (res == null)
                     {
-                        return new User(new Status(StatusCode.NoAuth));
+                        return new User(new Status(CDJStatusCode.NoAuth));
                     }
 
                     return res;

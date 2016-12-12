@@ -19,7 +19,7 @@ namespace cdjwebapi.Models
     		Init();
     	}
     	
-    	public RoomSong(StatusCode code) : base(code)
+    	public RoomSong(CDJStatusCode code) : base(code)
     	{
     		Init();
     	}
