@@ -20,13 +20,8 @@ namespace cdjwebapi
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             HttpConfiguration httpConfig = GlobalConfiguration.Configuration;
-            MediaTypeFormatterCollection mtfc = httpConfig.Formatters;
-            JsonMediaTypeFormatter jmtf = mtfc.JsonFormatter;
-            JsonSerializerSettings jss = jmtf.SerializerSettings;
-            jss.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-
-            //GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings
-                //.Re‌​ferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            httpConfig.Formatters.JsonFormatter.SerializerSettings
+                .ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 
             GlobalConfiguration.Configuration.EnsureInitialized();
 
