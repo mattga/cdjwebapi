@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -18,8 +19,14 @@ namespace cdjwebapi
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings
-                .Re‌​ferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            HttpConfiguration httpConfig = GlobalConfiguration.Configuration;
+            MediaTypeFormatterCollection mtfc = httpConfig.Formatters;
+            JsonMediaTypeFormatter jmtf = mtfc.JsonFormatter;
+            JsonSerializerSettings jss = jmtf.SerializerSettings;
+            jss.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+            //GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings
+                //.Re‌​ferenceLoopHandling = ReferenceLoopHandling.Ignore;
 
             GlobalConfiguration.Configuration.EnsureInitialized();
 
