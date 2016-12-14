@@ -71,15 +71,21 @@ namespace cdjwebapi.Controllers
             {
                 using (var context = new DbEntities())
                 {
-                    var res = (from r in context.Rooms
-                               where r.RoomId == id
-                               select r);
+                    var res = (from ru in context.RoomUsers
+                               where ru.RoomId == id & ru.UserId == u.UserId
+                               select ru);
 
-                    if (res.Count() == 0) return new RoomUser(CDJStatusCode.NotFound);
+                    RoomUser roomUser;
+                    if (res.Count() > 0)
+                    {
+                        roomUser = res.First();
+                        roomUser.Status = new Status(CDJStatusCode.Exists, "RoomUser already exists");
+                        return roomUser;
+                    }
 
-                    var roomUser = context.RoomUsers.Create();
+                    roomUser = new RoomUser();
                     roomUser.UserId = u.UserId;
-                    roomUser.RoomId = res.First().RoomId;
+                    roomUser.RoomId = id;
                     roomUser.Tokens = 100;
                     context.RoomUsers.Add(roomUser);
 
@@ -93,6 +99,7 @@ namespace cdjwebapi.Controllers
             }
             catch (Exception e)
             {
+                while (e.InnerException != null) e = e.InnerException;
                 return new RoomUser { Status = new Status(e) };
             }
         }

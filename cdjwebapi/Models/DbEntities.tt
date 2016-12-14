@@ -41,7 +41,7 @@ public class <#=code.Escape(entity)#> : BaseModel
 		Init();
 	}
 	
-	public <#=code.Escape(entity)#>(CDJStatusCode code) : base(code)
+	public <#=code.Escape(entity)#>(CDJStatusCode code, string description = "") : base(code, description)
 	{
 		Init();
 	}

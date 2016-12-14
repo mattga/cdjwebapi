@@ -25,9 +25,9 @@ namespace cdjwebapi.Models
             set { status = value; }
         }
 
-        public BaseModel(CDJStatusCode code = CDJStatusCode.Ok)
+        public BaseModel(CDJStatusCode code = CDJStatusCode.Ok, string description = "")
         {
-            status = new Status(code);
+            status = new Status(code, description);
         }
         
         public BaseModel(Status status)

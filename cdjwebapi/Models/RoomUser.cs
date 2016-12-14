@@ -19,7 +19,7 @@ namespace cdjwebapi.Models
     		Init();
     	}
     	
-    	public RoomUser(CDJStatusCode code) : base(code)
+    	public RoomUser(CDJStatusCode code, string description = "") : base(code, description)
     	{
     		Init();
     	}
