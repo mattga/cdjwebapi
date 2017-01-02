@@ -103,5 +103,49 @@ namespace cdjwebapi.Controllers
                 return new RoomUser { Status = new Status(e) };
             }
         }
+
+        // POST api/room/<id>/addsong
+        [Route("{id:int}/addsong"), HttpPost]
+        public RoomSong AddSong(int id, RoomSong s)
+        {
+            try
+            {
+                using (var context = new DbEntities())
+                {
+                    var res = (from rs in context.RoomSongs
+                               where rs.RoomId == id & rs.SourceId == s.SourceId
+                               select rs);
+
+                    RoomSong roomSong;
+                    if (res.Count() > 0)
+                    {
+                        roomSong = res.First();
+                        roomSong.Tokens += s.Tokens;
+                        roomSong.Status = new Status(CDJStatusCode.Exists, "RoomSong already exists. Added tokens.");
+                    }
+                    else
+                    {
+                        roomSong = s;
+                        roomSong.RoomId = id;
+                        roomSong.Status = new Status(); // OK
+
+                        context.RoomSongs.Add(roomSong);
+                    }
+
+                    int ret = context.SaveChanges();
+
+                    if (ret > 0) return roomSong;
+                    else return new RoomSong
+                    {
+                        Status = new Status(CDJStatusCode.Error, "Failed to commit new RoomSong")
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+                while (e.InnerException != null) e = e.InnerException;
+                return new RoomSong { Status = new Status(e) };
+            }
+        }
     }
 }
