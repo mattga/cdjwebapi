@@ -36,19 +36,19 @@ namespace cdjwebapi.Controllers
             {
                 using (var context = new DbEntities())
                 {
-                    var res = (from r in context.Rooms
-                               where r.RoomId == id
-                               select r);
+                    var room = context.Rooms.Find(id);
 
-                    if (res.Count() == 0)
+                    if (room == null)
                     {
                         return new Room(CDJStatusCode.NotFound);
                     }
 
-                    var room = res.First();
+                    room.RoomSongs = context.RoomSongs
+                        .Where(rs => rs.RoomId == room.RoomId)
+                        .OrderByDescending(rs => rs.Tokens)
+                        .ToList<RoomSong>(); // Load songs (sorted)
                     context.Entry(room).Reference(r => r.Host).Load(); // Load host
                     context.Entry(room).Collection(r => r.RoomUsers).Load(); // Load users
-                    context.Entry(room).Collection(r => r.RoomSongs).Load(); // Load songs
                     foreach (RoomUser roomUser in room.RoomUsers)
                     {
                         context.Entry(roomUser).Reference(ru => ru.User).Load(); // Load each user
