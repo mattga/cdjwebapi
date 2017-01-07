@@ -127,6 +127,7 @@ namespace cdjwebapi.Controllers
                     {
                         roomSong = s;
                         roomSong.RoomId = id;
+                        roomSong.PublishedDate = DateTime.Now;
                         roomSong.Status = new Status(); // OK
 
                         context.RoomSongs.Add(roomSong);
@@ -137,7 +138,7 @@ namespace cdjwebapi.Controllers
                     if (ret > 0) return roomSong;
                     else return new RoomSong
                     {
-                        Status = new Status(CDJStatusCode.Error, "Failed to commit new RoomSong")
+                        Status = new Status(CDJStatusCode.Error, "Failed to commit RoomSong")
                     };
                 }
             }
