@@ -105,15 +105,15 @@ namespace cdjwebapi.Controllers
         }
 
         // POST api/room/<id>/addsong
-        [Route("{id:int}/addsong"), HttpPost]
-        public RoomSong AddSong(int id, RoomSong s)
+        [Route("{rid:int}/user/{uid:int}/addsong"), HttpPost]
+        public RoomSong AddSong(int rid, int uid, RoomSong s)
         {
             try
             {
                 using (var context = new DbEntities())
                 {
                     var res = (from rs in context.RoomSongs
-                               where rs.RoomId == id & rs.SourceId == s.SourceId
+                               where rs.RoomId == rid & rs.SourceId == s.SourceId
                                select rs);
 
                     RoomSong roomSong;
@@ -126,12 +126,17 @@ namespace cdjwebapi.Controllers
                     else
                     {
                         roomSong = s;
-                        roomSong.RoomId = id;
+                        roomSong.RoomId = rid;
                         roomSong.PublishedDate = DateTime.Now;
                         roomSong.Status = new Status(); // OK
 
                         context.RoomSongs.Add(roomSong);
                     }
+
+                    RoomUser roomUser = context.RoomUsers
+                        .Where(ru => ru.RoomId == rid && ru.UserId == uid)
+                        .First();
+                    roomUser.Tokens -= s.Tokens;
 
                     int ret = context.SaveChanges();
 
