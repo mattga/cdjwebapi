@@ -104,8 +104,8 @@ namespace cdjwebapi.Controllers
             }
         }
 
-        // POST api/room/<id>/addsong
-        [Route("{rid:int}/user/{uid:int}/addsong"), HttpPost]
+        // POST api/room/<id>/addtrack
+        [Route("{rid:int}/user/{uid:int}/addtrack"), HttpPost]
         public RoomSong AddSong(int rid, int uid, RoomSong s)
         {
             try
