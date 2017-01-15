@@ -12,19 +12,19 @@ using System.Collections.Generic;
 
 namespace cdjwebapi.Models
 {
-    public class RoomSong : BaseModel
+    public class RoomTrack : BaseModel
     {
-    	public RoomSong()
+    	public RoomTrack()
     	{
     		Init();
     	}
     	
-    	public RoomSong(CDJStatusCode code, string description = "") : base(code, description)
+    	public RoomTrack(CDJStatusCode code, string description = "") : base(code, description)
     	{
     		Init();
     	}
     
-    	public RoomSong(Status status) : base(status)
+    	public RoomTrack(Status status) : base(status)
     	{
     		Init();
     	}
@@ -34,7 +34,7 @@ namespace cdjwebapi.Models
             Rooms = new HashSet<Room>();
         }
     
-        public int SongId { get; set; }
+        public int TrackId { get; set; }
         public int RoomId { get; set; }
         public string SourceId { get; set; }
         public string Title { get; set; }

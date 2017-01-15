@@ -12,19 +12,19 @@
           <ScalarProperty Name="isPrivate" ColumnName="isPrivate" />
           <ScalarProperty Name="AccessCode" ColumnName="AccessCode" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CurrentSongId" ColumnName="CurrentSongId" />
+          <ScalarProperty Name="CurrentTrackId" ColumnName="CurrentTrackId" />
           <ScalarProperty Name="BannerUrl" ColumnName="BannerUrl" />
-          <ScalarProperty Name="CurrentSongTime" ColumnName="CurrentSongTime" />
+          <ScalarProperty Name="CurrentTrackTime" ColumnName="CurrentTrackTime" />
           <ScalarProperty Name="IsPlaying" ColumnName="IsPlaying" />
           <ScalarProperty Name="AllowYT" ColumnName="AllowYT" />
           <ScalarProperty Name="AllowSP" ColumnName="AllowSP" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RoomSongs">
-      <EntityTypeMapping TypeName="Model.RoomSong">
-        <MappingFragment StoreEntitySet="RoomSongs">
-          <ScalarProperty Name="SongId" ColumnName="SongId" />
+    <EntitySetMapping Name="RoomTracks">
+      <EntityTypeMapping TypeName="Model.RoomTrack">
+        <MappingFragment StoreEntitySet="RoomTracks">
+          <ScalarProperty Name="TrackId" ColumnName="TrackId" />
           <ScalarProperty Name="RoomId" ColumnName="RoomId" />
           <ScalarProperty Name="SourceId" ColumnName="SourceId" />
           <ScalarProperty Name="Title" ColumnName="Title" />

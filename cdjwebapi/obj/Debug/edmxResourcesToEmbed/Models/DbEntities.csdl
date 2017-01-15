@@ -12,22 +12,22 @@
     <Property Name="isPrivate" Type="Boolean" Nullable="false" />
     <Property Name="AccessCode" Type="Int32" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
-    <Property Name="CurrentSongId" Type="Int32" />
+    <Property Name="CurrentTrackId" Type="Int32" />
     <Property Name="BannerUrl" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-    <Property Name="CurrentSongTime" Type="Int32" />
+    <Property Name="CurrentTrackTime" Type="Int32" />
     <Property Name="IsPlaying" Type="Boolean" />
     <Property Name="AllowYT" Type="Boolean" />
     <Property Name="AllowSP" Type="Boolean" />
     <NavigationProperty Name="Host" Relationship="Self.Rooms_ibfk_1" FromRole="Rooms" ToRole="Users" />
-    <NavigationProperty Name="CurrentSong" Relationship="Self.Rooms_ibfk_2" FromRole="Rooms" ToRole="RoomSongs" />
-    <NavigationProperty Name="RoomSongs" Relationship="Self.RoomSongs_ibfk_1" FromRole="Rooms" ToRole="RoomSongs" />
+    <NavigationProperty Name="CurrentTrack" Relationship="Self.Rooms_ibfk_2" FromRole="Rooms" ToRole="RoomTracks" />
+    <NavigationProperty Name="RoomTracks" Relationship="Self.RoomTracks_ibfk_1" FromRole="Rooms" ToRole="RoomTracks" />
     <NavigationProperty Name="RoomUsers" Relationship="Self.RoomUsers_ibfk_1" FromRole="Rooms" ToRole="RoomUsers" />
   </EntityType>
-  <EntityType Name="RoomSong">
+  <EntityType Name="RoomTrack">
     <Key>
-      <PropertyRef Name="SongId" />
+      <PropertyRef Name="TrackId" />
     </Key>
-    <Property Name="SongId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TrackId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="RoomId" Type="Int32" Nullable="false" />
     <Property Name="SourceId" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="Title" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
@@ -41,8 +41,8 @@
     <Property Name="CreatedDate" Type="DateTime" />
     <Property Name="Source" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
     <Property Name="SourceLikeCount" Type="Int32" />
-    <NavigationProperty Name="Rooms" Relationship="Self.Rooms_ibfk_2" FromRole="RoomSongs" ToRole="Rooms" />
-    <NavigationProperty Name="Room" Relationship="Self.RoomSongs_ibfk_1" FromRole="RoomSongs" ToRole="Rooms" />
+    <NavigationProperty Name="Rooms" Relationship="Self.Rooms_ibfk_2" FromRole="RoomTracks" ToRole="Rooms" />
+    <NavigationProperty Name="Room" Relationship="Self.RoomTracks_ibfk_1" FromRole="RoomTracks" ToRole="Rooms" />
   </EntityType>
   <EntityType Name="RoomUser">
     <Key>
@@ -87,25 +87,25 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="Rooms_ibfk_2">
-    <End Role="RoomSongs" Type="Self.RoomSong" Multiplicity="0..1" />
+    <End Role="RoomTracks" Type="Self.RoomTrack" Multiplicity="0..1" />
     <End Role="Rooms" Type="Self.Room" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="RoomSongs">
-        <PropertyRef Name="SongId" />
+      <Principal Role="RoomTracks">
+        <PropertyRef Name="TrackId" />
       </Principal>
       <Dependent Role="Rooms">
-        <PropertyRef Name="CurrentSongId" />
+        <PropertyRef Name="CurrentTrackId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="RoomSongs_ibfk_1">
+  <Association Name="RoomTracks_ibfk_1">
     <End Role="Rooms" Type="Self.Room" Multiplicity="1" />
-    <End Role="RoomSongs" Type="Self.RoomSong" Multiplicity="*" />
+    <End Role="RoomTracks" Type="Self.RoomTrack" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Rooms">
         <PropertyRef Name="RoomId" />
       </Principal>
-      <Dependent Role="RoomSongs">
+      <Dependent Role="RoomTracks">
         <PropertyRef Name="RoomId" />
       </Dependent>
     </ReferentialConstraint>
@@ -136,7 +136,7 @@
   </Association>
   <EntityContainer Name="DbEntities" annotation:LazyLoadingEnabled="false">
     <EntitySet Name="Rooms" EntityType="Self.Room" />
-    <EntitySet Name="RoomSongs" EntityType="Self.RoomSong" />
+    <EntitySet Name="RoomTracks" EntityType="Self.RoomTrack" />
     <EntitySet Name="RoomUsers" EntityType="Self.RoomUser" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <AssociationSet Name="Rooms_ibfk_1" Association="Self.Rooms_ibfk_1">
@@ -144,12 +144,12 @@
       <End Role="Rooms" EntitySet="Rooms" />
     </AssociationSet>
     <AssociationSet Name="Rooms_ibfk_2" Association="Self.Rooms_ibfk_2">
-      <End Role="RoomSongs" EntitySet="RoomSongs" />
+      <End Role="RoomTracks" EntitySet="RoomTracks" />
       <End Role="Rooms" EntitySet="Rooms" />
     </AssociationSet>
-    <AssociationSet Name="RoomSongs_ibfk_1" Association="Self.RoomSongs_ibfk_1">
+    <AssociationSet Name="RoomTracks_ibfk_1" Association="Self.RoomTracks_ibfk_1">
       <End Role="Rooms" EntitySet="Rooms" />
-      <End Role="RoomSongs" EntitySet="RoomSongs" />
+      <End Role="RoomTracks" EntitySet="RoomTracks" />
     </AssociationSet>
     <AssociationSet Name="RoomUsers_ibfk_1" Association="Self.RoomUsers_ibfk_1">
       <End Role="Rooms" EntitySet="Rooms" />

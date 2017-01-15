@@ -12,18 +12,18 @@
     <Property Name="isPrivate" Type="bool" Nullable="false" />
     <Property Name="AccessCode" Type="int" />
     <Property Name="CreatedDate" Type="timestamp" Precision="0" Nullable="false" />
-    <Property Name="CurrentSongId" Type="int" />
+    <Property Name="CurrentTrackId" Type="int" />
     <Property Name="BannerUrl" Type="varchar" MaxLength="256" />
-    <Property Name="CurrentSongTime" Type="int" />
+    <Property Name="CurrentTrackTime" Type="int" />
     <Property Name="IsPlaying" Type="bool" />
     <Property Name="AllowYT" Type="bool" />
     <Property Name="AllowSP" Type="bool" />
   </EntityType>
-  <EntityType Name="RoomSongs">
+  <EntityType Name="RoomTracks">
     <Key>
-      <PropertyRef Name="SongId" />
+      <PropertyRef Name="TrackId" />
     </Key>
-    <Property Name="SongId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TrackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RoomId" Type="int" Nullable="false" />
     <Property Name="SourceId" Type="varchar" MaxLength="64" />
     <Property Name="Title" Type="varchar" MaxLength="64" Nullable="false" />
@@ -77,25 +77,25 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="Rooms_ibfk_2">
-    <End Role="RoomSongs" Type="Self.RoomSongs" Multiplicity="0..1" />
+    <End Role="RoomTracks" Type="Self.RoomTracks" Multiplicity="0..1" />
     <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="RoomSongs">
-        <PropertyRef Name="SongId" />
+      <Principal Role="RoomTracks">
+        <PropertyRef Name="TrackId" />
       </Principal>
       <Dependent Role="Rooms">
-        <PropertyRef Name="CurrentSongId" />
+        <PropertyRef Name="CurrentTrackId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="RoomSongs_ibfk_1">
+  <Association Name="RoomTracks_ibfk_1">
     <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
-    <End Role="RoomSongs" Type="Self.RoomSongs" Multiplicity="*" />
+    <End Role="RoomTracks" Type="Self.RoomTracks" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Rooms">
         <PropertyRef Name="RoomId" />
       </Principal>
-      <Dependent Role="RoomSongs">
+      <Dependent Role="RoomTracks">
         <PropertyRef Name="RoomId" />
       </Dependent>
     </ReferentialConstraint>
@@ -126,7 +126,7 @@
   </Association>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="db5cbd36be2b64435bb940a48d0153e78e" store:Type="Tables" />
-    <EntitySet Name="RoomSongs" EntityType="Self.RoomSongs" Schema="db5cbd36be2b64435bb940a48d0153e78e" store:Type="Tables" />
+    <EntitySet Name="RoomTracks" EntityType="Self.RoomTracks" Schema="db5cbd36be2b64435bb940a48d0153e78e" store:Type="Tables" />
     <EntitySet Name="RoomUsers" EntityType="Self.RoomUsers" Schema="db5cbd36be2b64435bb940a48d0153e78e" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="db5cbd36be2b64435bb940a48d0153e78e" store:Type="Tables" />
     <AssociationSet Name="Rooms_ibfk_1" Association="Self.Rooms_ibfk_1">
@@ -134,12 +134,12 @@
       <End Role="Rooms" EntitySet="Rooms" />
     </AssociationSet>
     <AssociationSet Name="Rooms_ibfk_2" Association="Self.Rooms_ibfk_2">
-      <End Role="RoomSongs" EntitySet="RoomSongs" />
+      <End Role="RoomTracks" EntitySet="RoomTracks" />
       <End Role="Rooms" EntitySet="Rooms" />
     </AssociationSet>
-    <AssociationSet Name="RoomSongs_ibfk_1" Association="Self.RoomSongs_ibfk_1">
+    <AssociationSet Name="RoomTracks_ibfk_1" Association="Self.RoomTracks_ibfk_1">
       <End Role="Rooms" EntitySet="Rooms" />
-      <End Role="RoomSongs" EntitySet="RoomSongs" />
+      <End Role="RoomTracks" EntitySet="RoomTracks" />
     </AssociationSet>
     <AssociationSet Name="RoomUsers_ibfk_1" Association="Self.RoomUsers_ibfk_1">
       <End Role="Rooms" EntitySet="Rooms" />

@@ -198,10 +198,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DbEntities1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbEntities.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Room.cs">
       <DependentUpon>DbEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RoomSong.cs">
+    <Compile Include="Models\RoomTrack.cs">
       <DependentUpon>DbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RoomUser.cs">
@@ -295,7 +300,7 @@
   <ItemGroup>
     <EntityDeploy Include="Models\DbEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DbEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>DbEntities1.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>

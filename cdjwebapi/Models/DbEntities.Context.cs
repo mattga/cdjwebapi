@@ -26,7 +26,7 @@ namespace cdjwebapi.Models
         }
     
         public virtual DbSet<Room> Rooms { get; set; }
-        public virtual DbSet<RoomSong> RoomSongs { get; set; }
+        public virtual DbSet<RoomTrack> RoomTracks { get; set; }
         public virtual DbSet<RoomUser> RoomUsers { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }

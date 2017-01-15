@@ -31,7 +31,7 @@ namespace cdjwebapi.Models
     
         private void Init()
         {
-            RoomSongs = new HashSet<RoomSong>();
+            RoomTracks = new HashSet<RoomTrack>();
             RoomUsers = new HashSet<RoomUser>();
         }
     
@@ -43,16 +43,16 @@ namespace cdjwebapi.Models
         public bool isPrivate { get; set; }
         public int? AccessCode { get; set; }
         public System.DateTime CreatedDate { get; set; }
-        public int? CurrentSongId { get; set; }
+        public int? CurrentTrackId { get; set; }
         public string BannerUrl { get; set; }
-        public int? CurrentSongTime { get; set; }
+        public int? CurrentTrackTime { get; set; }
         public bool? IsPlaying { get; set; }
         public bool? AllowYT { get; set; }
         public bool? AllowSP { get; set; }
     
         public virtual User Host { get; set; }
-        public virtual RoomSong CurrentSong { get; set; }
-        public virtual ICollection<RoomSong> RoomSongs { get; set; }
+        public virtual RoomTrack CurrentTrack { get; set; }
+        public virtual ICollection<RoomTrack> RoomTracks { get; set; }
         public virtual ICollection<RoomUser> RoomUsers { get; set; }
     }
 }

@@ -43,10 +43,10 @@ namespace cdjwebapi.Controllers
                         return new Room(CDJStatusCode.NotFound);
                     }
 
-                    room.RoomSongs = context.RoomSongs
-                        .Where(rs => rs.RoomId == room.RoomId)
-                        .OrderByDescending(rs => rs.Tokens)
-                        .ToList<RoomSong>(); // Load songs (sorted)
+                    room.RoomTracks = context.RoomTracks
+                        .Where(rt => rt.RoomId == room.RoomId)
+                        .OrderByDescending(rt => rt.Tokens)
+                        .ToList<RoomTrack>(); // Load songs (sorted)
                     context.Entry(room).Reference(r => r.Host).Load(); // Load host
                     context.Entry(room).Collection(r => r.RoomUsers).Load(); // Load users
                     foreach (RoomUser roomUser in room.RoomUsers)
@@ -106,42 +106,42 @@ namespace cdjwebapi.Controllers
 
         // POST api/room/<id>/addtrack
         [Route("{rid:int}/user/{uid:int}/addtrack"), HttpPost]
-        public RoomSong AddSong(int rid, int uid, RoomSong s)
+        public RoomTrack AddSong(int rid, int uid, RoomTrack t)
         {
             try
             {
                 using (var context = new DbEntities())
                 {
-                    var res = (from rs in context.RoomSongs
-                               where rs.RoomId == rid & rs.SourceId == s.SourceId
-                               select rs);
+                    var res = (from rt in context.RoomTracks
+                               where rt.RoomId == rid & rt.SourceId == t.SourceId
+                               select rt);
 
-                    RoomSong roomSong;
+                    RoomTrack track;
                     if (res.Count() > 0)
                     {
-                        roomSong = res.First();
-                        roomSong.Tokens += s.Tokens;
-                        roomSong.Status = new Status(CDJStatusCode.Exists, "RoomSong already exists. Added tokens.");
+                        track = res.First();
+                        track.Tokens += t.Tokens;
+                        track.Status = new Status(CDJStatusCode.Exists, "RoomSong already exists. Added tokens.");
                     }
                     else
                     {
-                        roomSong = s;
-                        roomSong.RoomId = rid;
-                        roomSong.PublishedDate = DateTime.Now;
-                        roomSong.Status = new Status(); // OK
+                        track = t;
+                        track.RoomId = rid;
+                        track.PublishedDate = DateTime.Now;
+                        track.Status = new Status(); // OK
 
-                        context.RoomSongs.Add(roomSong);
+                        context.RoomTracks.Add(track);
                     }
 
                     RoomUser roomUser = context.RoomUsers
                         .Where(ru => ru.RoomId == rid && ru.UserId == uid)
                         .First();
-                    roomUser.Tokens -= s.Tokens;
+                    roomUser.Tokens -= t.Tokens;
 
                     int ret = context.SaveChanges();
 
-                    if (ret > 0) return roomSong;
-                    else return new RoomSong
+                    if (ret > 0) return track;
+                    else return new RoomTrack
                     {
                         Status = new Status(CDJStatusCode.Error, "Failed to commit RoomSong")
                     };
@@ -150,7 +150,7 @@ namespace cdjwebapi.Controllers
             catch (Exception e)
             {
                 while (e.InnerException != null) e = e.InnerException;
-                return new RoomSong { Status = new Status(e) };
+                return new RoomTrack { Status = new Status(e) };
             }
         }
     }
