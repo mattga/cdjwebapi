@@ -63,6 +63,30 @@ namespace cdjwebapi.Controllers
             }
         }
 
+        // POST api/room
+        public Room Post(Room room)
+        {
+            try
+            {
+                using (var context = new DbEntities())
+                {
+                    room.CreatedDate = DateTime.Now;
+
+                    context.Rooms.Add(room);
+                    context.SaveChanges();
+                    context.Entry(room).Reference(r => r.Host).Load();
+
+                    room.Status = new Status();
+
+                    return room;
+                }
+            }
+            catch (Exception e)
+            {
+                return new Room { Status = new Status(e) };
+            }
+        }
+
         // POST api/room/<id>/join
         [Route("{id:int}/join"), HttpPost]
         public RoomUser Join(int id, User u)
