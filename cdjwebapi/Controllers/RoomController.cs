@@ -73,8 +73,17 @@ namespace cdjwebapi.Controllers
                     room.CreatedDate = DateTime.Now;
 
                     context.Rooms.Add(room);
+
+                    RoomUser ru = new RoomUser();
+                    ru.RoomId = room.RoomId;
+                    ru.UserId = (int)room.HostId;
+                    ru.Tokens = 100;
+                    context.RoomUsers.Add(ru);
+
                     context.SaveChanges();
+
                     context.Entry(room).Reference(r => r.Host).Load();
+                    context.Entry(room).Collection(r => r.RoomUsers).Load();
 
                     room.Status = new Status();
 
